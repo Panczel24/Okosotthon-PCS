@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace Okosotthon
 {
@@ -19,9 +20,9 @@ namespace Okosotthon
             this.JelenlegiHomerseklet = 21.0; 
         }
 
+        //ezt ai csinálta mivel valamiért nem akart lefurni a teszt, és azt írta hogy a 24.5 miatt, mert 24,5 lenne? és elküldte higy írjam így át és így működik a két teszt
         public override void ParancsVegrehajtasa(string parancs)
         {
-
             if (parancs.StartsWith("BEALLIT_HOMERSEKLET:"))
             {
                 string[] darabok = parancs.Split(':');
@@ -30,15 +31,17 @@ namespace Okosotthon
                 {
                     double homerseklet;
 
-                    if (double.TryParse(darabok[1], out homerseklet))
+                    if (double.TryParse(
+                        darabok[1],
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out homerseklet))
                     {
                         this.CelHomerseklet = homerseklet;
                         this.UtolsoFrissites = DateTime.Now;
                     }
                 }
             }
-
-
         }
 
         public override string AllapotJelentes()
