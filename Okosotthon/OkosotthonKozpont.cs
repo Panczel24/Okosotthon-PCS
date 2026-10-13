@@ -6,6 +6,7 @@ namespace Okosotthon
 {
     public class OkosotthonKozpont
     {
+
         private readonly List<OkosEszkoz> eszkozok;
         public OkosotthonKozpont()
         {
@@ -44,6 +45,41 @@ namespace Okosotthon
 
             return sikeresTeszt;
         }
+
+        public void OsszesVeszjelzesInditasa()
+        {
+            foreach (OkosEszkoz eszkoz in eszkozok)
+            {
+                if (eszkoz is IHangjezlo h)
+                {
+                    h.VeszjelzesInditas();
+                }
+            }
+        }
+
+        public void OsszesStatisztika()
+        {
+            foreach (OkosEszkoz eszkoz in eszkozok)
+            {
+                if (eszkoz is IStatisztika s)
+                {
+                    Console.WriteLine(s.StatisztikatKeszit());
+                }
+            }
+        }
+
+        public void OsszesIdozitoBeallit(int perc)
+        {
+            foreach (OkosEszkoz eszkoz in eszkozok)
+            {
+                if (eszkoz is IIdozitheto i)
+                {
+                    i.IdozitestBeallit(perc);
+                }
+            }
+        }
+
+
 
     }
 }

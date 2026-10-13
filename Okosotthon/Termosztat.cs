@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Okosotthon
 {
-    public class Termosztat : OkosEszkoz
+    public class Termosztat : OkosEszkoz, IIdozitheto, IStatisztika
     {
         double jelenlegiHomerseklet;
         double celHomerseklet;
@@ -64,5 +64,21 @@ namespace Okosotthon
 
         }
 
+        private int maradtIdo;
+        public void IdozitestBeallit(int perc)
+        {
+
+            maradtIdo = perc;
+        }
+
+        public int GetMaradtIdo()
+        {
+            return maradtIdo;
+        }
+
+        public string StatisztikatKeszit()
+        {
+            return ($"A termosztat idozitoje: {maradtIdo} perc.");
+        }
     }
 }

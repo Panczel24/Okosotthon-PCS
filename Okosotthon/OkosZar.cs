@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Okosotthon
 {
-    public class OkosZar: OkosEszkoz
+    public class OkosZar: OkosEszkoz, IHangjezlo, IStatisztika
     {
+        private int nyitasokszama = 0;
+        private bool rosszPin = false;
         private bool zartE;
         private string pinKod;
 
@@ -33,6 +35,11 @@ namespace Okosotthon
                     {
                         this.ZartE = false;
                         this.UtolsoFrissites = DateTime.Now;
+                        nyitasokszama += 1;
+                    }
+                    else
+                    {
+                        Csipog(2);
                     }
                 }
             }
@@ -75,6 +82,22 @@ namespace Okosotthon
 
         }
 
+      
+        public void Csipog(int hosszu)
+        {
+            Console.WriteLine($"Csipog: {hosszu} percig");
 
+        }
+
+        public void VeszjelzesInditas()
+        {
+            rosszPin = true;
+            Console.WriteLine("Vészjelzés");
+        }
+
+        public string StatisztikatKeszit()
+        {
+            return ($"Nyitások száma: {nyitasokszama}");
+        }
     }
 }
